@@ -5,28 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MMOCalculator"
         mc:Ignorable="d"
-        Title="MMO Konverter" Height="450" Width="600">
-    <Grid Margin="0,0,1,0">
+        Title="MMO Konverter" Height="450" Width="600" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+    <Window.Background>
+        <SolidColorBrush Color="#666666"/>
+    </Window.Background>
+    <Grid Margin="0,0,1,0" Width="600" Height="430">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="366"/>
+            <ColumnDefinition Width="63.2"/>
+            <ColumnDefinition Width="170.8"/>
             <ColumnDefinition Width="0"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnConvert" Content="Convert" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Height="18" Width="60" Click="btnConvert_Click"/>
-        <TextBox x:Name="inputName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Height="18"/>
-        <RichTextBox x:Name="inputOldData" Margin="10,50,340,9">
-            <FlowDocument>
-                <Paragraph>
-                    <Run/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <RichTextBox x:Name="outputCommands" Margin="328,50,22,9">
-            <FlowDocument>
-                <Paragraph>
-                    <Run/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+
+        <!-- inputName TextBox -->
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="165" Height="20" Background="#999999">
+            <TextBox x:Name="inputName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Width="163" Height="18" GotFocus="TextBox_GotFocus" Text="Név..." Background="#D1C5C5"/>
+        </Border>
+
+        <!-- inputOldData RichTextBox -->
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="250" Height="355" Background="#999999">
+            <RichTextBox x:Name="inputOldData" Width="248" Height="353" GotFocus="RichTextBox_GotFocus" IsReadOnly="False" Background="#D1C5C5">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="Régi MCMMO adatok..."/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Border>
+
+        <!-- outputCommands RichTextBox -->
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="328,50,10,0" Width="250" Height="355" Grid.ColumnSpan="3" Background="#999999">
+            <RichTextBox x:Name="outputCommands" Width="248" Height="353" IsReadOnly="True" Background="#D1C5C5">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="Parancsok..."/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Border>
+
+        <!-- btnConvert Button -->
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,10,0,0" Width="60" Height="20" Background="#999999">
+            <Button x:Name="btnConvert" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnConvert_Click" Height="20" Width="60" Background="#D1C5C5"/>
+        </Border>
     </Grid>
 </Window>

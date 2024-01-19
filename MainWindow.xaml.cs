@@ -30,8 +30,8 @@ namespace MMOCalculator {
                     Clipboard.SetText(run.Text);
                 }
             }
-            catch (System.Runtime.InteropServices.COMException ex) {
-                MessageBox.Show("Hiba történt a vágólap használata közben: " + ex.Message);
+            catch (System.Runtime.InteropServices.COMException) {
+                MessageBox.Show("Hiba történt a vágólap használata közben!");
             }
         }
     }
@@ -39,7 +39,6 @@ namespace MMOCalculator {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-
         }
 
         FlowDocument flowDocument = new FlowDocument();
@@ -52,6 +51,16 @@ namespace MMOCalculator {
             string range = new TextRange(inputOldData.Document.ContentStart, inputOldData.Document.ContentEnd).Text.Trim();
             List<string> dataList = range.Split('\n').ToList();
 
+            // Kivételek kezelése
+            if (inputName.Text.Trim() == "") {
+                MessageBox.Show($"A név mező üres!");
+                return;
+            }
+
+            if (range.Trim() == "") {
+                MessageBox.Show($"A beviteli mező üres!");
+                return;
+            }
 
             // Az időbélyegző kivágása a sorokból, a nem kellő sorok törlése
             for (int i = 0; i < dataList.Count; i++) {
@@ -67,7 +76,7 @@ namespace MMOCalculator {
             // [SkillName,SkillExp]
             string[,] skills = new string[dataList.Count, 2];
 
-            for (int i = 0; i < dataList.Count; i++) { //Ásás: 2,948 XP(8,156/59,980)
+            for (int i = 0; i < dataList.Count; i++) { 
 
                 skills[i, 0] = dataList[i].Split(':')[0]; // SkillName 
                 if (skills[i, 0] == "Szelídítés") skills[i, 0] = "Szelidítés"; // Elírás javítása, mert aki fordította egy fogalmatlan cigány
@@ -92,6 +101,23 @@ namespace MMOCalculator {
                 paragraph.Inlines.Add(hyperlink);
                 flowDocument.Blocks.Add(paragraph);
                 outputCommands.Document = flowDocument;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Név...") {
+                textBox.Text = "";
+            }
+        }
+
+        private void RichTextBox_GotFocus(object sender, RoutedEventArgs e) {
+            RichTextBox richTextBox = (RichTextBox)sender;
+            if (richTextBox.Document.Blocks.FirstBlock != null && richTextBox.Document.Blocks.FirstBlock is Paragraph paragraph) {
+                Run run = (Run)paragraph.Inlines.FirstInline;
+                if (run.Text == "Régi MCMMO adatok..." || run.Text == "Parancsok...") {
+                    run.Text = "";
+                }
             }
         }
     }
