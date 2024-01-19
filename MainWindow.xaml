@@ -1,0 +1,32 @@
+﻿<Window x:Class="MMOCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MMOCalculator"
+        mc:Ignorable="d"
+        Title="MMO Konverter" Height="450" Width="600">
+    <Grid Margin="0,0,1,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnConvert" Content="Convert" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Height="18" Width="60" Click="btnConvert_Click"/>
+        <TextBox x:Name="inputName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Height="18"/>
+        <RichTextBox x:Name="inputOldData" Margin="10,50,340,9">
+            <FlowDocument>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox x:Name="outputCommands" Margin="328,50,22,9">
+            <FlowDocument>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>
